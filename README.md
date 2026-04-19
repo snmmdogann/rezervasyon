@@ -1,60 +1,126 @@
-# CodeIgniter 4 Framework
+# Rezervasyon Sistemi
 
-## What is CodeIgniter?
+Bu proje, kullanıcıların otel ve restoran bilgilerini görüntüleyebildiği, rezervasyon işlemleri yapabildiği ve sistem üzerinden temel kullanıcı işlemlerini gerçekleştirebildiği bir web tabanlı rezervasyon uygulamasıdır.
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+Proje, PHP tabanlı **CodeIgniter 4** framework'ü kullanılarak geliştirilmiştir. Veritabanı işlemleri **MySQL** ile yürütülmektedir. Uygulama yerel sunucuda **XAMPP** ortamında çalıştırılmıştır.
 
-This repository holds the distributable version of the framework.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+## Proje Amacı
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+Bu projenin amacı, kullanıcıların tek bir platform üzerinden:
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+- kayıt olabilmesi,
+- sisteme giriş yapabilmesi,
+- otel ve restoranları görüntüleyebilmesi,
+- rezervasyon işlemi yapabilmesi,
+- yorum ve iletişim gibi temel işlemleri gerçekleştirebilmesi
 
-## Important Change with index.php
+için işlevsel bir rezervasyon sistemi sunmaktır.
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+## Kullanılan Teknolojiler
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+- **PHP**
+- **CodeIgniter 4**
+- **MySQL**
+- **HTML**
+- **CSS**
+- **JavaScript**
+- **XAMPP**
+- **Git & GitHub**
 
-**Please** read the user guide for a better explanation of how CI4 works!
+## Proje Özellikleri
 
-## Repository Management
+- Kullanıcı kayıt olma
+- Kullanıcı giriş yapma
+- Otel listeleme
+- Restoran listeleme
+- Rezervasyon oluşturma
+- Yorum yapısı
+- İletişim mesajları gönderme
+- Veritabanı bağlantısı ile dinamik veri yönetimi
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+## Proje Klasör Yapısı
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+bash
+rezervasyon/
+│
+├── app/                # Controller, Model, View ve uygulama dosyaları
+├── public/             # Uygulamanın giriş noktası
+├── system/             # CodeIgniter sistem dosyaları
+├── tests/              # Test klasörü
+├── writable/           # Cache, log ve geçici dosyalar
+├── .gitignore          # Git tarafından izlenmeyecek dosyalar
+├── composer.json       # Composer bağımlılıkları
+├── spark               # CodeIgniter CLI aracı
+└── README.md           # Proje açıklama dosyası
+Kurulum Adımları
 
-## Contributing
+Projeyi kendi bilgisayarınızda çalıştırmak için aşağıdaki adımları izleyin.
 
-We welcome contributions from the community.
+1. Projeyi klonlayın
+git clone https://github.com/snnmdogann/rezervasyon.git
+2. Proje klasörüne girin
+cd rezervasyon
+3. Composer bağımlılıklarını yükleyin
+composer install
+4. .env dosyasını oluşturun
 
-Please read the [*Contributing to CodeIgniter*](https://github.com/codeigniter4/CodeIgniter4/blob/develop/CONTRIBUTING.md) section in the development repository.
+Projede .env dosyası GitHub’a yüklenmemiştir. Güvenlik nedeniyle bu dosyayı kendiniz oluşturmalısınız.
 
-## Server Requirements
+Örnek veritabanı ayarları:
 
-PHP version 8.1 or higher is required, with the following extensions installed:
+CI_ENVIRONMENT = development
+app.baseURL = 'http://localhost/rezervasyon/public'
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+database.default.hostname = localhost
+database.default.database = rezervasyon_db
+database.default.username = root
+database.default.password =
+database.default.DBDriver = MySQLi
+database.default.port = 3306
+5. Veritabanını oluşturun
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - If you are still using PHP 7.4 or 8.0, you should upgrade immediately.
-> - The end of life date for PHP 8.1 will be December 31, 2025.
+phpMyAdmin üzerinden şu isimle bir veritabanı oluşturun:
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+rezervasyon_db
+6. Migration çalıştırın
+php spark migrate
+7. Uygulamayı çalıştırın
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+XAMPP üzerinde Apache ve MySQL servislerini başlatın.
+
+Tarayıcıdan şu adresi açın:
+
+http://localhost/rezervasyon/public
+Veritabanı Tabloları
+
+Projede yer alan temel tablolar şunlardır:
+
+kullanicilar
+oteller
+restoranlar
+rezervasyonlar
+yorumlar
+iletisim_mesajlari
+migrations
+
+Bu tablolar sistemin kullanıcı, rezervasyon ve içerik yönetimi işlemlerini gerçekleştirmek için kullanılmaktadır.
+
+Kullanım Senaryosu
+Kullanıcı sisteme kayıt olur.
+Kayıtlı kullanıcı giriş yapar.
+Otel ve restoran listelerini görüntüler.
+İlgili rezervasyon işlemlerini yapar.
+Gerekirse yorum bırakır veya iletişim formu üzerinden mesaj gönderir.
+Güvenlik Notu
+
+Bu projede .env dosyası güvenlik nedeniyle GitHub reposuna dahil edilmemiştir. Veritabanı bağlantı bilgileri gibi hassas veriler bu dosyada tutulmalıdır.
+
+Geliştirici
+
+Sinem DOĞAN
+
+GitHub: snmmdogann
+
+Lisans
+
+Bu proje eğitim amaçlı geliştirilmiştir.
